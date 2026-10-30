@@ -1,0 +1,53 @@
+{
+  "name": "ai-tool-scout-desktop",
+  "version": "0.1.0",
+  "description": "根据一句话需求调研并推荐 AI 工具的桌面 Agent（国内大模型 + 国内搜索）",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node test/agent.test.js",
+    "e2e": "node test/e2e.js",
+    "dist:win": "electron-builder --win nsis zip --x64",
+    "dist:mac": "electron-builder --mac dmg",
+    "dist:linux": "electron-builder --linux AppImage"
+  },
+  "author": "GAO DIXIAO",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "electron": "45.0.0",
+    "electron-builder": "26.0.12"
+  },
+  "dependencies": {
+    "docx": "9.5.1",
+    "dompurify": "3.2.6",
+    "exceljs": "4.4.0",
+    "marked": "15.0.12"
+  },
+  "productName": "AI 工具推荐助手",
+  "build": {
+    "appId": "cn.aitoolscout.desktop",
+    "productName": "AI工具推荐助手",
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**",
+      "renderer/**",
+      "skill/**",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "artifactName": "AI工具推荐助手-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "AI工具推荐助手-安装版-${version}.${ext}"
+    },
+    "mac": {
+      "category": "public.app-category.productivity"
+    }
+  }
+}

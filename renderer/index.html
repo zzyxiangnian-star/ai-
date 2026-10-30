@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="system">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline'; script-src 'self'">
+  <title>AI 工具推荐助手</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <aside class="side" id="side">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/><path d="M11 8v6M8 11h6"/></svg>
+        </span>
+        <span class="label brand-name">AI 工具推荐</span>
+      </div>
+      <button class="nav" id="btn-new" data-anim="pop"><span class="ico" data-icon="plus"></span><span class="label">新调研</span></button>
+      <div class="label side-title">历史记录</div>
+      <div class="history" id="history"></div>
+      <div class="side-foot">
+        <button class="nav" id="btn-theme" data-anim="spin-in"><span class="ico" data-icon="sun"></span><span class="label" id="theme-label">跟随系统</span></button>
+        <button class="nav" id="btn-settings" data-anim="turn"><span class="ico" data-icon="gear"></span><span class="label">设置</span></button>
+        <button class="nav collapse" id="btn-collapse" data-anim="slide"><span class="ico" data-icon="sidebar"></span><span class="label">收起侧栏</span></button>
+      </div>
+    </aside>
+
+    <main class="stage" id="stage">
+      <section class="view home" id="view-home">
+        <div class="col">
+          <h1 class="greet">今天想找什么样的 AI 工具？</h1>
+          <p class="sub">用一句话说出想实现的功能。我会去扣子、腾讯元器、AI 工具集等国内渠道调研，核实官网后给出 6 列对比表；没有现成工具时，给出组合方案。</p>
+          <div class="composer-slot" id="home-slot"></div>
+          <div class="status" id="status"></div>
+          <div class="examples" id="examples"></div>
+        </div>
+      </section>
+
+      <section class="view chat hidden" id="view-chat">
+        <div class="scroll" id="scroll"><div class="col" id="turns"></div></div>
+        <div class="dock"><div class="col" id="chat-slot"></div></div>
+      </section>
+
+      <form class="composer" id="composer">
+        <textarea id="input" rows="1" placeholder="例如：我想要一个能自动把文字转成小红书视频的智能体"></textarea>
+        <div class="composer-bar">
+          <span class="hint" id="model-hint"></span>
+          <button type="button" class="icon-btn stop hidden" id="btn-stop" title="停止"><span class="ico" data-icon="stop"></span></button>
+          <button type="submit" class="icon-btn send" id="btn-send" title="发送（Enter）"><span class="ico" data-icon="send"></span></button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <div class="overlay hidden" id="settings">
+    <div class="modal" role="dialog" aria-labelledby="settings-title">
+      <div class="modal-head">
+        <h2 id="settings-title">设置</h2>
+        <button class="icon-btn" id="btn-close-settings" title="关闭"><span class="ico" data-icon="x"></span></button>
+      </div>
+      <div class="modal-body">
+        <h3>大模型</h3>
+        <label>服务商<select id="f-provider"></select></label>
+        <label>接口地址 base_url<input id="f-baseurl" placeholder="https://…/v1"></label>
+        <div class="row2">
+          <label>模型名<input id="f-model"></label>
+          <label>温度<input id="f-temp" type="number" min="0" max="1.5" step="0.1"></label>
+        </div>
+        <label>API Key <a class="key-link" id="llm-key-link" href="#">去申请</a><input id="f-llmkey" type="password" autocomplete="off"></label>
+
+        <h3>联网搜索</h3>
+        <label>搜索服务<select id="f-search"></select></label>
+        <label>API Key <a class="key-link" id="search-key-link" href="#">去申请</a><input id="f-searchkey" type="password" autocomplete="off"></label>
+
+        <h3>调研</h3>
+        <label>每次调研最多工具调用次数<input id="f-max" type="number" min="5" max="80" step="1"></label>
+        <p class="note">次数越多查得越全，耗时和费用也越高。30 次通常足够跑完两个测试案例。</p>
+        <div class="test-result" id="test-result"></div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn ghost" id="btn-test">测试连接</button>
+        <button class="btn primary" id="btn-save">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="../node_modules/marked/lib/marked.umd.js"></script>
+  <script src="../node_modules/dompurify/dist/purify.min.js"></script>
+  <script src="icons.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
