@@ -39,12 +39,12 @@
       "output": "dist"
     },
     "win": {
-      "artifactName": "AI工具推荐助手-${version}-${arch}.${ext}"
+      "artifactName": "AI-Tool-Scout-${version}-x64-portable.${ext}"
     },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
-      "artifactName": "AI工具推荐助手-安装版-${version}.${ext}"
+      "artifactName": "AI-Tool-Scout-Setup-${version}.${ext}"
     },
     "mac": {
       "category": "public.app-category.productivity"
